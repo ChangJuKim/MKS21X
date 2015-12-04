@@ -1,11 +1,11 @@
-clone
-add
-commit
-push
-pull
-show
-checkout
-reset
-diff
-status
-log
+clone	 -- copies over the repositories to the machine
+add   	 -- puts files into planning area
+commit	 -- puts files into git (online)
+push	 -- 
+pull	 --
+show	 --
+checkout --
+reset	 --
+diff	 --
+status	 --
+log	 --
