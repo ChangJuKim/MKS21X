@@ -2,4 +2,10 @@ clone	 -- copies over the repositories to the machine
 add   	 -- Prepares files (unsure)
 commit	 -- puts files into planning area
 push	 -- pushes files from planning area to git (online)
-pull	 -- pulls files from git (online)
+pull	 -- pulls files from git (online) to directory/comptuer
+show	 --
+checkout --
+reset	 --
+diff	 --
+status	 --
+log	 --
