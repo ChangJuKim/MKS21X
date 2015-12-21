@@ -9,10 +9,7 @@ public abstract class Actor implements Comparable<Actor>{
 
     //this method will compare actors by name
     public int compareTo(Actor other){
-	//return name.compareTo(other.getName());
-	//return health - other.getHealth();
-	//return strength - other.getStr();
-	
+	return 0;
 	//Try 0-3 and compile and run Demo3 after each one. 
 	//If it works comment out the return statement
 	//then do the next.
