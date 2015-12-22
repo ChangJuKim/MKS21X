@@ -1,8 +1,10 @@
+import java.lang.*;
+
 public class BarCode implements Comparable{
     // instance variables
     private String _zip;
     private int _checkDigit;
-    private static String[] conv;
+    private static String[] conv = createConversion();
 
     // constructors
     //precondtion: zip.length() = 5 and zip contains only digits.
@@ -10,13 +12,14 @@ public class BarCode implements Comparable{
     //               or zip contains a non digit
     //               _zip and _checkDigit are initialized.
     public BarCode(String zip) {
-	for (int i = 0; i < 9; i++) {
-	    
-	}
+	_zip = zip;
     }
     
     // postcondition: Creates a copy of a bar code.
-    public BarCode(BarCode x){}
+    public BarCode(BarCode x){
+	super._zip = x._zip;
+	super._checkDigit = x._checkDigit;
+    }
 
 
     private String[] createConversion() {
@@ -47,8 +50,12 @@ public class BarCode implements Comparable{
 	return ary;
     }
     
-    private String toBarcode(int n) {
-	
+    private String convToBarcode() {
+	String ans = "";
+	for (int i = 0; i < _zip.length; i++) {
+	    ans += conv[Integer.parseInt(zip.charAt(i))];
+	}
+	return ans;
     }
     
     //post: computes and returns the check sum for _zip
