@@ -1,8 +1,10 @@
+import java.lang.*;
+
 public class BarCode implements Comparable{
     // instance variables
     private String _zip;
     private int _checkDigit;
-    private static int[] conv;
+    private static String[] conv = createConversion();
 
     // constructors
     //precondtion: zip.length() = 5 and zip contains only digits.
@@ -10,33 +12,59 @@ public class BarCode implements Comparable{
     //               or zip contains a non digit
     //               _zip and _checkDigit are initialized.
     public BarCode(String zip) {
-	for (int i = 0; i < 9; i++) {
-	    
-	}
+	_zip = zip;
     }
     
     // postcondition: Creates a copy of a bar code.
-    public BarCode(BarCode x){}
+    public BarCode(BarCode x){
+	_zip = x._zip;
+	_checkDigit = x._checkDigit;
+    }
 
 
-    private int[] createConversion() {
-	int[] ary = new ary[10];
+    private String[] createConversion() {
+	String[] ary = new ary[10];
 	for (int i = 0; i < 9; i++) {
-	    
+	    if (i = 0) {
+		ary[i] = "||:::";
+	    } else if (i = 1) {
+		ary[i] = ":::||";
+	    } else if (i = 2) {
+		ary[i] = "::|:|";
+	    } else if (i = 3) {
+		ary[i] = "::||:";
+	    } else if (i = 4) {
+		ary[i] = ":|::|";
+	    } else if (i = 5) {
+		ary[i] = ":|:|:";
+	    } else if (i = 6) {
+		ary[i] = ":||::";
+	    } else if (i = 7) {
+		ary[i] = "|:::|";
+	    } else if (i = 8) {
+		ary[i] = "|::|:";
+	    } else if (i = 9) {
+		ary[i] = "|:|::";
+	    }
 	}
+	return ary;
     }
     
-    private String toBarcode(int n) {
-	
+    private String convToBarcode() {
+	String ans = "";
+	for (int i = 0; i < _zip.length; i++) {
+	    ans += conv[Integer.parseInt(zip.charAt(i))];
+	}
+	return ans;
     }
     
     //post: computes and returns the check sum for _zip
     private int checkSum(){}
-
+    
     //postcondition: format zip + check digit + barcode 
     //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
     public String toString(){}
-
+    
 
     public boolean equals(Object other){}
     // postcondition: false if the object is not a BarCode, 
