@@ -75,7 +75,7 @@ public class BarCode implements Comparable{
     
 
     public boolean equals(Object other){
-	if (other instanceof BarCode && _zip.equals((BarCode)other._zip)) {
+	if (other instanceof BarCode && _zip.equals(((BarCode)other)._zip)) {
 	    return true;
 	}
 	return false;
@@ -85,19 +85,19 @@ public class BarCode implements Comparable{
     // true when they match.
 
 
-    public int compareTo(Comparable other){
-	// postcondition: compares the zip + checkdigit
-	if (_zip.equals(other._zip) && checkSum() == (BarCode)other.checkSum()) {
+    //   public int compareTo(Comparable other){
+    public int compareTo(Object other) {
+    // postcondition: compares the zip + checkdigit
+	if (_zip.equals(((BarCode)other)._zip) && checkSum() == ((BarCode)other).checkSum()) {
 	    return 0;
 	}
-	int z1 = 0;
-	int z2 = 0;
-	for (int i = 0; i < _zip.length(); i++) {
-	    z1 += Math.pow(10.0, _zip.length() + 1 - i) + Integer.parseInt(""+charAt(i));
-	    z2 += Math.pow(10.0, _zip.length() + 1 - i) + Integer.parseInt(""+_zip.charAt(i));
-	}
-	z1 += checkSum();
-	z2 += _zip.checkSum();
+	int z1 = Integer.parseInt(_zip);
+	int z2 = Integer.parseInt(((BarCode)other)._zip);
+	
+	z1 = z1 * 10 + checkSum();
+	z2 = z2 * 10 + ((BarCode)other).checkSum();
 	return z1 - z2;
+
+	
     }
 }

@@ -4,7 +4,7 @@ public class BarCode implements Comparable{
     // instance variables
     private String _zip;
     private int _checkDigit;
-    private static String[] conv = createConversion();
+    private String[] conv = createConversion();
 
     // constructors
     //precondtion: zip.length() = 5 and zip contains only digits.
@@ -23,27 +23,27 @@ public class BarCode implements Comparable{
 
 
     private String[] createConversion() {
-	String[] ary = new ary[10];
+	String[] ary = new String[10];
 	for (int i = 0; i < 9; i++) {
-	    if (i = 0) {
+	    if (i == 0) {
 		ary[i] = "||:::";
-	    } else if (i = 1) {
+	    } else if (i == 1) {
 		ary[i] = ":::||";
-	    } else if (i = 2) {
+	    } else if (i == 2) {
 		ary[i] = "::|:|";
-	    } else if (i = 3) {
+	    } else if (i == 3) {
 		ary[i] = "::||:";
-	    } else if (i = 4) {
+	    } else if (i == 4) {
 		ary[i] = ":|::|";
-	    } else if (i = 5) {
+	    } else if (i == 5) {
 		ary[i] = ":|:|:";
-	    } else if (i = 6) {
+	    } else if (i == 6) {
 		ary[i] = ":||::";
-	    } else if (i = 7) {
+	    } else if (i == 7) {
 		ary[i] = "|:::|";
-	    } else if (i = 8) {
+	    } else if (i == 8) {
 		ary[i] = "|::|:";
-	    } else if (i = 9) {
+	    } else if (i == 9) {
 		ary[i] = "|:|::";
 	    }
 	}
@@ -52,27 +52,52 @@ public class BarCode implements Comparable{
     
     private String convToBarcode() {
 	String ans = "";
-	for (int i = 0; i < _zip.length; i++) {
-	    ans += conv[Integer.parseInt(zip.charAt(i))];
+	for (int i = 0; i < _zip.length(); i++) {
+	    ans += conv[Integer.parseInt(""+_zip.charAt(i))];
 	}
 	return ans;
     }
     
     //post: computes and returns the check sum for _zip
-    private int checkSum(){}
+    private int checkSum(){
+	int ans = 0;
+	for (int i = 0; i < _zip.length(); i++) {
+	    ans += Integer.parseInt(""+_zip.charAt(i));
+	}
+	return ans % 10;
+    }
     
     //postcondition: format zip + check digit + barcode 
     //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
-    public String toString(){}
+    public String toString(){
+	return convToBarcode();
+    }
     
 
-    public boolean equals(Object other){}
+    public boolean equals(Object other){
+	if (other instanceof BarCode && _zip.equals((BarCode)other._zip)) {
+	    return true;
+	}
+	return false;
+    }
     // postcondition: false if the object is not a BarCode, 
     // false if it is a non-matching barcode
     // true when they match.
 
 
-    public int compareTo(Comparable other){}
-    // postcondition: compares the zip + checkdigit 
-
+    public int compareTo(Comparable other){
+	// postcondition: compares the zip + checkdigit
+	if (_zip.equals(other._zip) && checkSum() == (BarCode)other.checkSum()) {
+	    return 0;
+	}
+	int z1 = 0;
+	int z2 = 0;
+	for (int i = 0; i < _zip.length(); i++) {
+	    z1 += Math.pow(10.0, _zip.length() + 1 - i) + Integer.parseInt(""+charAt(i));
+	    z2 += Math.pow(10.0, _zip.length() + 1 - i) + Integer.parseInt(""+_zip.charAt(i));
+	}
+	z1 += checkSum();
+	z2 += _zip.checkSum();
+	return z1 - z2;
+    }
 }
