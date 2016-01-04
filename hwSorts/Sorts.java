@@ -46,5 +46,20 @@ public class Sorts{
 	//from least to greatest just like we did in class
 	//same algorithm as the way you created your OrderedSuperArray
 	
+	int[] ans = new int[data.length];
+	int minIndex = 0; //index of minimum number
+	//loops through the entire data
+	for (int i = 0; i < data.length; i++) {
+	    //finds the minimum value
+	    for (int j = 0; j < data.length; j++) {
+		if (data[j] <= data[minIndex]) {
+		    minIndex = j; //records the index of lowest value
+		}
+	    }
+	    //records the minimum value of data
+	    ans[i] = data[minIndex];
+	    data[minIndex] = Integer.MAX_VALUE; //removes data's minimum number
+	}
+	return ans;
     }
 }
