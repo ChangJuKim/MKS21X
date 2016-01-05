@@ -62,4 +62,21 @@ public class Sorts{
 	}
 	return ans;
     }
+
+    //swaps the minimum value with index 0, 1, 2, ...
+    public static void selection(int[] data) {
+	int hold = 0; //temporarily holds a value when swapping
+	int minIndex = 0;
+	for (int i = 0; i < data.length; i++) {
+	    //finds minimum number's index
+	    for (int j = 0; j < data.length; j++) {
+		if (data[j] <= data[minIndex]) {
+		    minIndex = j;
+		}
+	    }
+	    hold = data[minIndex];
+	    data[minIndex] = data[i];
+	    data[i] = hold;
+	}
+    }
 }
