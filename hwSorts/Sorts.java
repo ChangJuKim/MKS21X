@@ -3,7 +3,7 @@ public class Sorts{
 	//print the array like:  [ 1, 2, 3, 4]
 	String ans = "[";
 	for (int i = 0; i < data.length; i++) {
-	    ans += " " + i + ",";
+	    ans += " " + data[i] + ",";
 	}
 	System.out.println(ans.substring(0, ans.length() - 1) + "]");
     }
@@ -32,7 +32,7 @@ public class Sorts{
 	    last = middle + 1;
 	    middle = (first + last) / 2;
 	}
-	return num;
+	return middle;
     }
     private static int[] add(int[]data, int num) {
 	for (int i = data.length; i > find(data,num); i--) {
@@ -46,7 +46,7 @@ public class Sorts{
 	//from least to greatest just like we did in class
 	//same algorithm as the way you created your OrderedSuperArray
 	
-	int[] ans = new int[data.length];
+	/*	int[] ans = new int[data.length];
 	int minIndex = 0; //index of minimum number
 	//loops through the entire data
 	for (int i = 0; i < data.length; i++) {
@@ -60,7 +60,26 @@ public class Sorts{
 	    ans[i] = data[minIndex];
 	    data[minIndex] = Integer.MAX_VALUE; //removes data's minimum number
 	}
-	return ans;
+	printArray(ans); */
+
+	
+	//error
+
+	//temporarily holds the number to be moved
+	int tempHold;
+	for (int i = 1; i < data.length; i++) {
+	    if (data[i] < data[i-1]) {
+		tempHold = data[i]; 
+		int index = find(data, data[i]);
+		//shifts everything from num's desired location to i-1 one over. 
+		for (int j = i; j > index; j--) {
+		    data[j] = data[j-1];
+		}
+		data[index] = tempHold;
+	    }
+	    printArray(data);
+	}
+	printArray(data);
     }
 
     //swaps the minimum value with index 0, 1, 2, ...
@@ -78,5 +97,16 @@ public class Sorts{
 	    data[minIndex] = data[i];
 	    data[i] = hold;
 	}
+	printArray(data);
+    }
+
+    public static void main(String[]args) {
+	int[] ary = new int[10];
+	for (int i = 0; i < ary.length; i++) {
+	    ary[i] = ary.length - i;
+	}
+	printArray(ary);
+	selection(ary);
+	insertionSort(ary);
     }
 }
