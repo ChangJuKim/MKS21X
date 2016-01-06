@@ -9,7 +9,9 @@ public class Sorts{
 	}
 	System.out.println(ans.substring(0, ans.length() - 1) + "]");
     }
-    //finds num's rightful place
+
+    /*
+
     private static int[] increaseSize(int[]data) {
 	int[] newData = new int[data.length * 2];
 	for (int i = 0; i < data.length; i++) {
@@ -47,6 +49,7 @@ public class Sorts{
 	return middle;
     }
 
+
     //
     private static int[] add(int[]data, int num) {
 	for (int i = data.length-1; i > find(data,num); i--) {
@@ -55,29 +58,13 @@ public class Sorts{
 	data[find(data,num)] = num;
 	return data;
     }
+
+    */
+    
     public static void insertionSort(int[]data){
 	//your code here to make data re-order its elements
 	//from least to greatest just like we did in class
 	//same algorithm as the way you created your OrderedSuperArray
-	
-	/*	int[] ans = new int[data.length];
-	int minIndex = 0; //index of minimum number
-	//loops through the entire data
-	for (int i = 0; i < data.length; i++) {
-	    //finds the minimum value
-	    for (int j = 0; j < data.length; j++) {
-		if (data[j] <= data[minIndex]) {
-		    minIndex = j; //records the index of lowest value
-		}
-	    }
-	    //records the minimum value of data
-	    ans[i] = data[minIndex];
-	    data[minIndex] = Integer.MAX_VALUE; //removes data's minimum number
-	}
-	printArray(ans); */
-
-	
-	//error
 
 	//temporarily holds the number to be moved
 	int tempHold;
