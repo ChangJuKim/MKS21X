@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Sorts{
     public static void printArray(int[]data){
 	//print the array like:  [ 1, 2, 3, 4]
@@ -15,27 +17,39 @@ public class Sorts{
 	}
 	return newData;
     }
-    
+
+    //finds proper place for a number, given it is an ordered list
     private static int find(int[]data, int num) {
         int first = 0;
 	int last = data.length;
 	int middle = (first + last) / 2;
-	if (first == last - 1) {
-	    return num;
-	} else if (data[middle] > num) {
-	    first = middle + 1;
-	    middle = (first + last) / 2;
-	} else if (data[middle] < num) {
-	    last = middle;
-	    middle = (first + last) / 2;
-	} else if (data[middle] == num) {
-	    last = middle + 1;
-	    middle = (first + last) / 2;
+	boolean foundPlace = false;
+	while (!foundPlace) {
+	    //if looking at 2 side-by-side numbers
+	    if (first == last - 1 || first == last - 2) {
+		System.out.println("end!");
+		middle = (first + last) / 2;
+		foundPlace = true;
+	    } else if (data[middle] < num) {
+		System.out.println("middle, "+middle+", "+data[middle]+" is < num "+num+"!");
+		first = middle + 1;
+		middle = (first + last) / 2;
+	    } else if (data[middle] > num) {
+		System.out.println("middle, "+middle+", "+data[middle]+" is > num "+num+"!");
+		last = middle;
+		middle = (first + last) / 2;
+	    } else if (data[middle] == num) {
+		System.out.println("middle, "+middle+", "+data[middle]+" is = num "+num+"!");
+		last = middle + 1;
+		middle = (first + last) / 2;
+	    }
 	}
 	return middle;
     }
+
+    //
     private static int[] add(int[]data, int num) {
-	for (int i = data.length; i > find(data,num); i--) {
+	for (int i = data.length-1; i > find(data,num); i--) {
 	    data[i] = data[i-1];
 	}
 	data[find(data,num)] = num;
@@ -70,14 +84,17 @@ public class Sorts{
 	for (int i = 1; i < data.length; i++) {
 	    if (data[i] < data[i-1]) {
 		tempHold = data[i]; 
-		int index = find(data, data[i]);
-		//shifts everything from num's desired location to i-1 one over. 
-		for (int j = i; j > index; j--) {
+		int j = i;
+		//shifts everything from num's desired location to i-1 one over.
+		//tempHold also preserves number to be compared (to find)
+		while (j > 0 && tempHold < data[j-1]) {
+		    //System.out.println("j("+j+") - [data[j], data[j-1]] : ["+data[j]+", "+data[j-1]+"]");
 		    data[j] = data[j-1];
+		    j--;
 		}
-		data[index] = tempHold;
+		data[j] = tempHold;
 	    }
-	    printArray(data);
+	    printArray(data); 
 	}
 	printArray(data);
     }
@@ -100,13 +117,21 @@ public class Sorts{
 	printArray(data);
     }
 
-    public static void main(String[]args) {
-	int[] ary = new int[10];
+    public static int[] randomArray() {
+	Random rand = new Random();
+	int seed = rand.nextInt();
+	rand = new Random(seed);
+	int size = rand.nextInt(5);
+	int[] ary = new int[5 + size];
 	for (int i = 0; i < ary.length; i++) {
-	    ary[i] = ary.length - i;
+	    ary[i] = rand.nextInt(20);
 	}
+	return ary;
+    }
+
+    public static void main(String[]args) {
+	int[] ary = randomArray();
 	printArray(ary);
-	selection(ary);
 	insertionSort(ary);
     }
 }
