@@ -87,19 +87,41 @@ public class Sorts{
     }
 
     //swaps the minimum value with index 0, 1, 2, ...
-    public static void selection(int[] data) {
+    public static void selectionSort(int[] data) {
 	int hold = 0; //temporarily holds a value when swapping
 	int minIndex = 0;
 	for (int i = 0; i < data.length; i++) {
+	    minIndex = i; //prevents loop from changing previous numbers
 	    //finds minimum number's index
-	    for (int j = 0; j < data.length; j++) {
+	    for (int j = i; j < data.length; j++) {
 		if (data[j] <= data[minIndex]) {
 		    minIndex = j;
 		}
 	    }
+	    //System.out.println("minIndex = "+minIndex);
 	    hold = data[minIndex];
+	    //System.out.println("holding "+data[minIndex]);
 	    data[minIndex] = data[i];
+	    //System.out.println("replacing upper index "+minIndex+" with "+data[i]);
 	    data[i] = hold;
+	    //System.out.println("replacing lower index "+i+" with "+hold);
+	    // printArray(data);
+	}
+	printArray(data);
+    }
+
+    public static void bubbleSort(int[] data) {
+	int hold = 0;
+	//keeps track of where to stop looking
+	//essentially i is where j stops
+	for (int i = data.length - 2; i > 0; i--) {
+	    for (int j = 0; j < i; j++){
+		if (data[j] > data[j+1]) {
+		    hold = data[j];
+		    data[j] = data[j+1];
+		    data[j+1] = hold;
+		}
+	    }
 	}
 	printArray(data);
     }
@@ -119,6 +141,6 @@ public class Sorts{
     public static void main(String[]args) {
 	int[] ary = randomArray();
 	printArray(ary);
-	insertionSort(ary);
+	bubbleSort(ary);
     }
 }
